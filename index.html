@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>無料相談受付</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Zen+Kaku+Gothic+New:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0d0d;
+    --white: #f5f2ee;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --gray: #6b6b6b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(36px, 7vw, 72px);
+    line-height: 1.3;
+    font-weight: 700;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero p {
+    font-size: clamp(14px, 2vw, 18px);
+    color: var(--gold-light);
+    line-height: 1.9;
+    max-width: 520px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+  .btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.1em;
+    padding: 18px 48px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+  .btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  /* PAIN */
+  .section { padding: 100px 24px; max-width: 800px; margin: 0 auto; }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    margin-bottom: 48px;
+  }
+  .pain-list { list-style: none; }
+  .pain-list li {
+    border-top: 1px solid rgba(201,168,76,0.2);
+    padding: 28px 0;
+    font-size: clamp(16px, 2.5vw, 20px);
+    line-height: 1.7;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .pain-list li:last-child { border-bottom: 1px solid rgba(201,168,76,0.2); }
+  .pain-list li::before {
+    content: '—';
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* SOLUTION */
+  .solution-bg {
+    background: #141414;
+    padding: 100px 24px;
+  }
+  .solution-inner { max-width: 800px; margin: 0 auto; }
+  .solution-inner h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    line-height: 1.5;
+    margin-bottom: 48px;
+  }
+  .solution-inner h2 span { color: var(--gold); }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .card {
+    background: #1a1a1a;
+    padding: 36px 28px;
+    border-top: 2px solid var(--gold);
+  }
+  .card-num {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .card h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 18px;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .card p { font-size: 13px; color: #999; line-height: 1.8; }
+
+  /* CTA */
+  .cta-section {
+    padding: 120px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(26px, 5vw, 48px);
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .cta-section p { color: var(--gold-light); margin-bottom: 48px; line-height: 1.9; }
+  .note { font-size: 12px; color: var(--gray); margin-top: 20px; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid #222;
+    padding: 32px 24px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--gray);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <p class="hero-label">FREE CONSULTATION</p>
+  <h1>あなたの悩みを<br><span>たった30分</span>で<br>整理します。</h1>
+  <p>何から始めればいいかわからない。<br>そんな方のための、完全無料の個別相談です。</p>
+  <a href="#cta" class="btn">今すぐ無料で相談する</a>
+</section>
+
+<section class="solution-bg">
+  <div class="solution-inner">
+    <p class="section-label">PROBLEM</p>
+    <ul class="pain-list">
+      <li>やりたいことはあるのに、何から手をつければいいかわからない</li>
+      <li>独学で頑張っているけど、成果が出ている気がしない</li>
+      <li>周りに相談できる人がいなくて、一人で抱え込んでいる</li>
+      <li>時間もお金も使っているのに、前に進んでいる実感がない</li>
+    </ul>
+  </div>
+</section>
+
+<div class="section">
+  <p class="section-label">SOLUTION</p>
+  <h2 style="font-family:'Noto Serif JP',serif;font-size:clamp(26px,4vw,40px);line-height:1.6;margin-bottom:48px;">
+    相談するだけで、<br><span style="color:var(--gold)">次の一手が見えてくる。</span>
+  </h2>
+  <div class="cards">
+    <div class="card">
+      <p class="card-num">01</p>
+      <h3>現状整理</h3>
+      <p>今どこにいるのかを一緒に整理します。</p>
+    </div>
+    <div class="card">
+      <p class="card-num">02</p>
+      <h3>課題の特定</h3>
+      <p>本当のボトルネックを見つけます。</p>
+    </div>
+    <div class="card">
+      <p class="card-num">03</p>
+      <h3>行動プランの提示</h3>
+      <p>明日からできる具体的な一歩をお伝えします。</p>
+    </div>
+  </div>
+</div>
+
+<section class="cta-section" id="cta">
+  <h2>まず、話してみてください。</h2>
+  <p>完全無料・30分・オンライン対応<br>強引な勧誘は一切ありません。</p>
+  <a href="#" class="btn">無料相談を申し込む</a>
+  <p class="note">※ LINEにてご連絡差し上げます</p>
+</section>
+
+<footer>
+  <p>&copy; 2026 Your Brand. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
